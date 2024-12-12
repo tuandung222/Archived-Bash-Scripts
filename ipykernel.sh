@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Description: Make use the anaconda enviroments as the kernel for jupyter sever.
 eval "$(conda shell.bash hook)"
 
 
