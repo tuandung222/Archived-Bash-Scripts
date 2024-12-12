@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Description: Check if the GPU with ID 0 have enough GPU for runing a bash script.
+
 apt install -y bc
 GPU_FREE_MEMORY_THRESHOLD=32 # GB
 BASH_FILE_PATH="run.sh"
