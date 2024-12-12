@@ -1,5 +1,4 @@
-# Description: Script to serve the Qwen2-VL-72B-Instruct-GPTQ-Int4 model.
-
+# Description: Script to serve the Qwen2-VL-72B-Instruct-GPTQ-Int4 model. Make sure you have 160GB RAM on 4 GPU!!!
 # Activate the conda environment:
 eval "$(conda shell.bash hook)"
 conda activate vllm
