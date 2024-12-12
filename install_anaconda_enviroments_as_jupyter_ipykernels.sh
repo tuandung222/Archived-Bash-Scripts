@@ -26,10 +26,6 @@ done < environments.txt
 # Remove the temporary file
 rm environments.txt
 
-
-huggingface-cli login --token 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
-
-
 # java
 sudo apt update
 sudo apt install openjdk-17-jdk # Replace 11 with your desired Java version
