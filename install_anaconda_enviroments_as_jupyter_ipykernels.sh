@@ -1,13 +1,17 @@
 #!/bin/bash
 
-# Description: Make use the anaconda enviroments as the kernel for jupyter sever.
 eval "$(conda shell.bash hook)"
 
 
 # Get a list of all conda environments
-conda env list | awk '{print $1}' | grep -v base | tail -n +3 > environments.txt
+conda env list | awk '{print $1}' | grep -v base | tail -n +1> environments.txt
 # Loop through each environment
 while IFS= read -r env_name; do
+  # Skip lines starting with '#'
+  if [[ $env_name == \#* ]]; then
+    continue
+  fi
+
   # Activate the environment
   conda init
   conda activate "$env_name"
@@ -26,6 +30,3 @@ done < environments.txt
 # Remove the temporary file
 rm environments.txt
 
-# java
-sudo apt update
-sudo apt install openjdk-17-jdk # Replace 11 with your desired Java version
