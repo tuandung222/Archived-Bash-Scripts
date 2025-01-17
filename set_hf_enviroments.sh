@@ -12,6 +12,10 @@ mkdir -p /dscilab_dungvo/workspace/huggingface_cache
 sed -i '/^export HF_HOME=/d' ~/.bashrc
 echo 'export HF_HOME=/dscilab_dungvo/workspace/huggingface_cache' >> ~/.bashrc
 
+# Update or add HF_HUB_ENABLE_HF_TRANSFER
+sed -i '/^export HF_HUB_ENABLE_HF_TRANSFER=/d' ~/.bashrc
+echo 'export HF_HUB_ENABLE_HF_TRANSFER=1' >> ~/.bashrc
+
 # # Update or add NCCL_LIBRARY
 # sed -i '/^export NCCL_LIBRARY=/d' ~/.bashrc
 # echo 'export NCCL_LIBRARY=/usr/lib/x86_64-linux-gnu/libnccl.so' >> ~/.bashrc
