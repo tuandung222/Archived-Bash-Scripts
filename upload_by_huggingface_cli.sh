@@ -7,7 +7,14 @@
 # --repo-type model \
 # --private
 
-
 # Template 2
+# huggingface-cli upload-large-folder \
+# tuandunghcmut/paper_clones_2 \
+# ./ \
+# --repo-type model \
+# --private
+
+
+# Template 3
 # huggingface-cli upload <your-username>/<repo-name> <local-folder-path> <destination-path-in-repo> --repo-type <type>
 # huggingface-cli upload tuandunghcmut/vscode_dev vscode_dev.zip --repo-type model
