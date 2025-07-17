@@ -1,0 +1,14 @@
+
+
+```python
+from datasets import load_dataset
+
+# Path to the directory containing Parquet files
+parquet_dir = "/home/dungvpt/workspace/PyTorch-Training-Framework-Qualgo/cc100_sharded_parquet/th"
+
+# Load all Parquet files in the directory
+dataset = load_dataset("parquet", data_files={"train": f"{parquet_dir}/*.parquet"})["train"]
+
+# Print dataset info to verify
+print(dataset)
+```
