@@ -35,7 +35,7 @@ node_modules/
 npm-debug.log*
 
 # Generated files
-jenkins_admin_password.txt
+jenkins_password.txt
 jenkins_container_id.txt
 environments.txt
 

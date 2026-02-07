@@ -1,3 +1,13 @@
+#!/bin/bash
+# Description: Run Axolotl ML framework with JupyterLab in Docker
+# Usage: bash axolotl-jupyter-docker-start.sh
+# Requirements: NVIDIA GPU, nvidia-docker runtime
+# Access: http://localhost:10000
+
+set -e
+
+echo "Starting Axolotl with JupyterLab..."
+
 docker run -d --rm --gpus all \
     --name jax-lab \
     --hostname jax-lab \
@@ -22,7 +32,10 @@ docker run -d --rm --gpus all \
             --NotebookApp.notebook_dir=/home/dungvpt 
     "
 
+echo "JupyterLab started!"
+echo "Access at: http://localhost:10000"
 
+# Alternative command for specific GPUs:
 # docker run -d --rm --gpus '"device=1,2"' \
 #     --name jax-lab \
 #     --hostname jax-lab \

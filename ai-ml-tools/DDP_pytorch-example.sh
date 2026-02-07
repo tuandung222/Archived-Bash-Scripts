@@ -1,3 +1,8 @@
+#!/bin/bash
+# Description: PyTorch Distributed Data Parallel (DDP) training examples using torchrun
+# Usage: These are example commands. Edit and use as templates for your training scripts.
+# Note: This file contains multiple example configurations for distributed training
+
 NCCL_P2P_DISABLE=1 CUDA_VISIBLE_DEVICES=0,1,2,3 \
 torchrun --nproc_per_node=4 \
 --rdzv_endpoint=localhost:6961 \

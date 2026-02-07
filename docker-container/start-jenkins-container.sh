@@ -1,26 +1,34 @@
-# run docker container, it return container id
-# use container id to get password /var/jenkins_home/secrets/initialAdminPassword
-# write password to file jenkins_password.txt
+#!/bin/bash
+# Description: Start Jenkins Docker container and retrieve admin password
+# Usage: bash start-jenkins-container.sh
+# Output: Creates jenkins_container_id.txt and jenkins_password.txt
 
-JENKIN_PORT=1010
-# first remove all container that created from image that contain jenkins
-docker ps -a | grep jenkins | awk '{print $1}' | xargs docker rm -f
+set -e
 
-# run docker container, it return container id
-container_id=$(docker run -d -p $JENKIN_PORT:8080 -p 50000:50000 jenkins:2.60.3)
-echo "Container ID: $container_id" >> jenkins_container_id.txt
+JENKINS_PORT=1010
 
-# do a loop to check if /var/jenkins_home/secrets/initialAdminPassword exist
-# if no exist loop again, else terminate the loop
-while [ ! $(docker exec -i $container_id bash -c 'ls /var/jenkins_home/secrets/initialAdminPassword') ]; do
-    echo "Waiting for Jenkins to start..."
-    sleep 0.5
+echo "Removing old Jenkins containers..."
+docker ps -a | grep jenkins | awk '{print $1}' | xargs -r docker rm -f || true
+
+echo "Starting Jenkins container..."
+container_id=$(docker run -d -p "$JENKINS_PORT:8080" -p 50000:50000 jenkins:2.60.3)
+echo "Container ID: $container_id" | tee jenkins_container_id.txt
+
+echo "Waiting for Jenkins to initialize..."
+# Wait for the password file to be created
+while ! docker exec -i "$container_id" bash -c 'test -f /var/jenkins_home/secrets/initialAdminPassword' 2>/dev/null; do
+    echo "  Still waiting..."
+    sleep 2
 done
 
+echo "Retrieving admin password..."
+docker exec -i "$container_id" bash -c 'cat /var/jenkins_home/secrets/initialAdminPassword' > jenkins_password.txt
 
-
-# use container id to get password /var/jenkins_home/secrets/initialAdminPassword
-# write password to file jenkins_password.txt
-docker exec -i $container_id bash -c 'cat /var/jenkins_home/secrets/initialAdminPassword' > jenkins_password.txt
+echo ""
+echo "Jenkins started successfully!"
+echo "  Container ID: $container_id"
+echo "  Access Jenkins at: http://localhost:$JENKINS_PORT"
+echo "  Admin password saved to: jenkins_password.txt"
+cat jenkins_password.txt
 
 
