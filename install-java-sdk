@@ -1,3 +1,0 @@
-# java
-sudo apt update
-sudo apt install openjdk-17-jdk # Replace 17 with your desired Java version
