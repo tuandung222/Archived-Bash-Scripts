@@ -1,36 +1,75 @@
 # Archived Bash Scripts Overview
 
-This document provides a quick comment on each script or note stored in this archive so you can immediately see what purpose every file serves.
+This repository contains a curated collection of production-tested bash scripts organized by category. Each script has been refactored for better maintainability with proper error handling, documentation, and consistent formatting.
 
-| File | Comment |
-| --- | --- |
-| `DDP_pytorch-example.sh` | Launches a PyTorch distributed training job with `torchrun`, including rendezvous settings and optimizer overrides for an ALBEF-based configuration. |
-| `NVIDIA_SETUP_GUIDE[OPTIONAL].md` | Markdown guide that documents optional steps for preparing NVIDIA software on a workstation. |
-| `axolotl-jupyter-docker-start.sh` | Runs the Axolotl Docker image with GPU access and boots a ready-to-use JupyterLab session. |
-| `bitnet-install` | Dockerfile that builds Microsoft BitNet from source, generates TL2 kernels, and runs inference with a bundled GGUF model. |
-| `cat_etc_docker_daemon_json` | Prints a sample `/etc/docker/daemon.json` configured to use the NVIDIA container runtime by default. |
-| `check_free_gpu_then_exec.sh` | Monitors free memory on GPU 0 and executes a target script once the available memory exceeds a defined threshold. |
-| `convert_jupyter_notebook_to_html.sh` | Uses Jupyter nbconvert to export a notebook (including embedded images) to HTML with a custom output name. |
-| `forward-port` | Opens an SSH tunnel that forwards local port 10000 to a remote service through port 11031. |
-| `install-docker-on-linux` | Removes conflicting container packages, adds the official Docker repository, and installs the Docker Engine stack. |
-| `install-flash-attention-2.sh` | Installs FlashAttention v2 from source using `uv` to manage build dependencies and editable installs. |
-| `install-flash-attention.sh` | Installs the FlashAttention package from PyPI after ensuring `ninja` and `packaging` are available. |
-| `install-java-sdk` | Installs a specified OpenJDK version using the system package manager. |
-| `install-jenkins` | Adds the Jenkins repository and installs the Jenkins service, with optional sudo aliasing for root execution. |
-| `install-nodejs-on-linux.sh` | Installs Node.js 22 via NVM and documents verification steps. |
-| `install-nvidia-container-toolkit.sh` | Adds NVIDIA container toolkit repositories, installs specific toolkit versions, and configures Docker runtimes. |
-| `install_anaconda_enviroments_as_jupyter_ipykernels.sh` | Registers every Conda environment as a Jupyter kernel by installing `ipykernel` and invoking the kernel installer. |
-| `install_cuda_toolkit_12_6.sh` | Downloads and installs the CUDA 12.6 repository, installs the toolkit, and symlinks `/usr/local/cuda`. |
-| `install_git_lfs.sh` | Installs Git Large File Storage, initializes it for the current user, and verifies the installation. |
-| `kill_processes_on_linux` | Terminates processes related to Python, Weights & Biases, VS Code, and vLLM using `ps`, `grep`, and `kill`. |
-| `load_multiple_parquet_file` | Provides a Python snippet that loads multiple Parquet files into a Hugging Face `datasets` Dataset. |
-| `qwen72b_gpt1-int4_serving_4A100.sh` | Activates a Conda environment and serves the Qwen2-VL-72B GPTQ INT4 model with vLLM across four GPUs. |
-| `set_hf_enviroments.sh` | Backs up `.bashrc` and configures Hugging Face cache and transfer environment variables. |
-| `set_hf_transfer.sh` | Installs `hf_transfer` dependencies and ensures HF transfer acceleration is enabled in `.bashrc`. |
-| `start_jenkins_container.sh` | Starts a Jenkins Docker container, waits for initialization, and stores both container ID and admin password locally. |
-| `untar_gz_tar_file.sh` | Installs `tar` if necessary and extracts a specified `.tar.gz` archive. |
-| `upload_by_huggingface_cli.sh` | Provides template commands for uploading models or folders to Hugging Face using the CLI. |
-| `view_size_subfolders.sh` | Lists subdirectories by size using `du` and sorts them in descending order. |
-| `vscode_extension_install.sh` | Exports the current VS Code extensions list and reinstalls them from that file. |
-| `vscode_tunnel.sh` | Downloads the VS Code CLI and starts a remote tunnel session. |
-| `zip_folder_by_tar.sh` | Validates input arguments and tars a directory into a compressed archive. |
+## 📂 Repository Structure
+
+The repository is organized into the following categories:
+
+### 🤖 ai-ml-tools/
+AI and Machine Learning infrastructure scripts
+- `DDP_pytorch-example.sh` - PyTorch distributed training with torchrun
+- `install-anaconda-kernels.sh` - Register Conda environments as Jupyter kernels
+- `setup-huggingface-env.sh` - Configure Hugging Face cache and environment
+- `setup-hf-transfer.sh` - Enable fast HF Hub downloads
+- `qwen72b_gpt1-int4_serving_4A100.sh` - Serve quantized LLM with vLLM
+- `upload_by_huggingface_cli.sh` - HF Hub upload templates
+- `convert_jupyter_notebook_to_html.sh` - Export notebooks to HTML
+- `load_multiple_parquet_file` - Python snippet for loading Parquet datasets
+
+### 🛠️ development-tools/
+Development environment setup scripts
+- `install-java-sdk.sh` - Install OpenJDK with version selection
+- `install-jenkins.sh` - Install Jenkins CI/CD server
+- `install-nodejs.sh` - Install Node.js 22 via NVM
+- `install-git-lfs.sh` - Install and configure Git LFS
+- `vscode_extension_install.sh` - Backup and restore VS Code extensions
+- `vscode_tunnel.sh` - Start VS Code remote tunnel
+
+### 🐳 docker-container/
+Docker and container management scripts
+- `install-docker.sh` - Install Docker Engine with proper configuration
+- `docker-daemon-nvidia.json` - NVIDIA runtime configuration template
+- `bitnet.Dockerfile` - Microsoft BitNet inference container
+- `start-jenkins-container.sh` - Launch Jenkins in Docker
+- `axolotl-jupyter-docker-start.sh` - Axolotl ML framework with JupyterLab
+
+### 📦 file-operations/
+File system utilities and process management
+- `archive-folder.sh` - Create compressed tar archives
+- `extract-archive.sh` - Extract tar.gz files
+- `view-directory-sizes.sh` - Analyze disk usage by directory
+- `process-management-examples.sh` - Process termination examples
+
+### 🎮 gpu-cuda-nvidia/
+GPU computing setup and management
+- `install-cuda-toolkit-12.6.sh` - Install CUDA Toolkit 12.6
+- `install-nvidia-container-toolkit.sh` - Docker GPU support
+- `check-free-gpu-then-exec.sh` - Wait for GPU memory threshold
+- `install-flash-attention.sh` - FlashAttention v1 installation
+- `install-flash-attention-2.sh` - FlashAttention v2 from source
+- `NVIDIA_SETUP_GUIDE[OPTIONAL].md` - Complete NVIDIA setup guide
+
+### 🌐 network-ssh/
+Network utilities and SSH tunneling
+- `forward-port.sh` - Create SSH port forwarding tunnels
+
+## 📖 Documentation
+
+Each category directory contains a detailed README.md with:
+- Script descriptions and usage examples
+- Common workflows
+- Troubleshooting guides
+- Best practices
+
+See the main [README.md](README.md) for complete documentation.
+
+## ✨ Improvements
+
+All scripts have been refactored to include:
+- Proper shebang (`#!/bin/bash`)
+- Error handling with `set -e` where appropriate
+- Input validation and helpful usage messages
+- Descriptive comments and documentation
+- Consistent naming conventions
+- Executable permissions
